@@ -1,0 +1,113 @@
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  display: grid;
+  place-items: start center;
+  padding-top: 120px;
+  z-index: 1500;
+}
+
+.search-dialog {
+  width: min(680px, 92vw);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+  overflow: hidden;
+  animation: pop 160ms ease;
+}
+
+@keyframes pop { from { transform: translateY(-8px); opacity: .8; } to { transform: translateY(0); opacity: 1; } }
+
+.search-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.search-input-row input {
+  flex: 1;
+  font-size: 16px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.15);
+  outline: none;
+}
+
+.search-input-row input:focus {
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.18);
+  border-color: #0066cc;
+}
+
+.search-close {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: .7;
+}
+
+.search-results {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  max-height: 360px;
+  overflow: auto;
+}
+
+.search-results li button {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 12px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.search-results li button:hover {
+  background: #f0f7ff;
+}
+
+.result-title { font-weight: 600; color: #223; }
+.result-chip {
+  font-size: 12px;
+  color: #004499;
+  background: rgba(0,102,204,.08);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.search-empty {
+  padding: 16px;
+  color: #555;
+}
+
+.search-ai {
+  padding: 10px 12px 16px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.ask-ai {
+  background: linear-gradient(135deg, #00cc66, #00aa44);
+  color: #fff;
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.ai-answer {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  color: #333;
+  white-space: pre-wrap;
+}
