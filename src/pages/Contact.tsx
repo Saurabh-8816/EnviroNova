@@ -6,10 +6,14 @@ const Contact: React.FC = () => {
     name: '',
     email: '',
     phone: '',
+    company: '',
+    subject: '',
     message: ''
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const [activeCard, setActiveCard] = useState<number | null>(null);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -19,95 +23,104 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
     console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', phone: '', message: '' });
+    alert('Thank you for reaching out! We\'ll get back to you within 24 hours.');
+    setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
   };
+
+  const handleGetDirections = () => {
+    const coordinates = "21.2497,81.6050";
+    const address = "NIT Raipur Campus, G.E. Road, Raipur, Chhattisgarh 492010";
+    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${coordinates}&destination_place_id=${encodeURIComponent(address)}`;
+    window.open(googleMapsUrl, '_blank');
+  };
+
+  const handleMethodAction = (action: string, method: any) => {
+    switch (action) {
+      case "Get Directions":
+        handleGetDirections();
+        break;
+      case "Call Now":
+        window.open(`tel:${method.details[0]}`, '_self');
+        break;
+      case "Send Email":
+        window.open(`mailto:${method.details[0]}`, '_self');
+        break;
+      default:
+        break;
+    }
+  };
+
+  const contactMethods = [
+    {
+      title: "Visit Our Office",
+      description: "Drop by for a coffee and discuss your environmental projects",
+      icon: "🏢",
+      details: ["NIT Raipur Campus", "G.E. Road, Raipur, Chhattisgarh 492010"],
+      action: "Get Directions"
+    },
+    {
+      title: "Call Us Direct",
+      description: "Speak with our environmental consultants immediately",
+      icon: "📞",
+      details: ["(415) 883-7575", "Mon-Fri: 9AM-6PM PST"],
+      action: "Call Now"
+    },
+    {
+      title: "Email Support",
+      description: "Send us detailed project requirements and documentation",
+      icon: "✉️",
+      details: ["info@environova.com", "Response within 4 hours"],
+      action: "Send Email"
+    }
+  ];
 
   return (
     <div className="contact-page">
-      {/* Header Section */}
-      <section className="contact-header">
+      {/* Contact Methods */}
+      <section className="contact-methods">
         <div className="container">
-          <h1>Get in Touch With Us</h1>
+          <h2>Choose Your Preferred Way to Connect</h2>
+          <div className="methods-grid">
+            {contactMethods.map((method, index) => (
+              <div 
+                key={index}
+                className={`method-card ${activeCard === index ? 'active' : ''}`}
+                onMouseEnter={() => setActiveCard(index)}
+                onMouseLeave={() => setActiveCard(null)}
+              >
+                <div className="method-icon">{method.icon}</div>
+                <h3>{method.title}</h3>
+                <p>{method.description}</p>
+                <div className="method-details">
+                  {method.details.map((detail, idx) => (
+                    <span key={idx} className="detail-item">{detail}</span>
+                  ))}
+                </div>
+                <button 
+                  className="method-action"
+                  onClick={() => handleMethodAction(method.action, method)}
+                >
+                  {method.action}
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Contact Content Section */}
-      <section className="contact-content">
+      {/* Contact Form Section */}
+      <section className="contact-form-section">
         <div className="container">
-          <div className="contact-grid">
-            {/* Contact Information */}
-            <div className="contact-info">
-              <h2>Contact Information</h2>
-              <div className="contact-details">
-                <div className="contact-item">
-                  <div className="contact-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                    </svg>
-                  </div>
-                  <div className="contact-text">
-                    <p>235 Montgomery Street, Suite 1105</p>
-                    <p>San Francisco, CA 94104</p>
-                  </div>
-                </div>
-
-                <div className="contact-item">
-                  <div className="contact-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                    </svg>
-                  </div>
-                  <div className="contact-text">
-                    <p>1116 S. Amphlett BLVD., Suite 2</p>
-                    <p>San Mateo, CA 94402</p>
-                  </div>
-                </div>
-
-                <div className="contact-item">
-                  <div className="contact-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                    </svg>
-                  </div>
-                  <div className="contact-text">
-                    <p>205 San Marin DR., Suite 4</p>
-                    <p>Novato, CA 94945</p>
-                  </div>
-                </div>
-
-                <div className="contact-item">
-                  <div className="contact-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                    </svg>
-                  </div>
-                  <div className="contact-text">
-                    <p>(415) 883-7575</p>
-                  </div>
-                </div>
-
-                <div className="contact-item">
-                  <div className="contact-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
-                  </div>
-                  <div className="contact-text">
-                    <p>info@environova.com</p>
-                  </div>
-                </div>
-              </div>
+          <div className="form-wrapper">
+            <div className="form-header">
+              <h2>Start Your Environmental Journey</h2>
+              <p>Tell us about your project and we'll provide a customized solution</p>
             </div>
-
-            {/* Contact Form */}
-            <div className="contact-form">
-              <h2>Please Fill Out the Form Below</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="name">Name *</label>
+            
+            <form onSubmit={handleSubmit} className="modern-form">
+              <div className="form-row">
+                <div className="input-group">
                   <input
                     type="text"
                     id="name"
@@ -115,11 +128,13 @@ const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
+                    placeholder=" "
                   />
+                  <label htmlFor="name">Full Name *</label>
+                  <div className="input-highlight"></div>
                 </div>
-
-                <div className="form-group">
-                  <label htmlFor="email">Email *</label>
+                
+                <div className="input-group">
                   <input
                     type="email"
                     id="email"
@@ -127,11 +142,15 @@ const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
+                    placeholder=" "
                   />
+                  <label htmlFor="email">Email Address *</label>
+                  <div className="input-highlight"></div>
                 </div>
+              </div>
 
-                <div className="form-group">
-                  <label htmlFor="phone">Phone *</label>
+              <div className="form-row">
+                <div className="input-group">
                   <input
                     type="tel"
                     id="phone"
@@ -139,42 +158,151 @@ const Contact: React.FC = () => {
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
+                    placeholder=" "
                   />
+                  <label htmlFor="phone">Phone Number *</label>
+                  <div className="input-highlight"></div>
                 </div>
-
-                <div className="form-group">
-                  <label htmlFor="message">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
+                
+                <div className="input-group">
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    value={formData.company}
                     onChange={handleInputChange}
-                    rows={5}
+                    placeholder=" "
                   />
+                  <label htmlFor="company">Company/Organization</label>
+                  <div className="input-highlight"></div>
                 </div>
+              </div>
 
-                <button type="submit" className="submit-btn">
-                  Submit
-                </button>
-              </form>
-            </div>
+              <div className="input-group">
+                <select
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="">Select Project Type</option>
+                  <option value="environmental-assessment">Environmental Impact Assessment</option>
+                  <option value="sustainability-consulting">Sustainability Consulting</option>
+                  <option value="waste-management">Waste Management Solutions</option>
+                  <option value="renewable-energy">Renewable Energy Projects</option>
+                  <option value="compliance-audit">Environmental Compliance Audit</option>
+                  <option value="other">Other Services</option>
+                </select>
+                <label htmlFor="subject">Project Type *</label>
+              </div>
+
+              <div className="input-group">
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows={6}
+                  placeholder=" "
+                />
+                <label htmlFor="message">Project Details & Requirements</label>
+                <div className="input-highlight"></div>
+              </div>
+
+              <button type="submit" className="submit-button">
+                <span>Send My Request</span>
+                <div className="button-ripple"></div>
+              </button>
+            </form>
           </div>
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="map-section">
+      {/* Interactive Map */}
+      <section className="interactive-map">
+        <div className="map-background-effects">
+          <div className="floating-icon icon-1">🌍</div>
+          <div className="floating-icon icon-2">🌱</div>
+          <div className="floating-icon icon-3">♻️</div>
+          <div className="floating-icon icon-4">🌿</div>
+          <div className="floating-icon icon-5">🔋</div>
+          <div className="floating-icon icon-6">💧</div>
+        </div>
+        <div className="map-header">
+          <div className="location-badge">
+            <span className="badge-pulse"></span>
+            <span className="badge-text">📍 We're Here</span>
+          </div>
+          <h2>Find Us on the Map</h2>
+          <p>Located at National Institute of Technology Raipur</p>
+          <div className="map-stats">
+            <div className="map-stat">
+              <div className="stat-icon">🚗</div>
+              <span>15 min from city center</span>
+            </div>
+            <div className="map-stat">
+              <div className="stat-icon">🅿️</div>
+              <span>Free parking available</span>
+            </div>
+            <div className="map-stat">
+              <div className="stat-icon">🚌</div>
+              <span>Public transport nearby</span>
+            </div>
+          </div>
+        </div>
         <div className="map-container">
-          <iframe
-            src="https://maps.google.com/maps?q=National%20Institute%20of%20Technology%20Raipur,%20G.E.%20Road,%20Raipur,%20Chhattisgarh%20492010,%20India&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            width="100%"
-            height="450"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="NIT Raipur Location"
-          />
+          <div className="map-frame">
+            <iframe
+              src="https://maps.google.com/maps?q=21.2497,81.6050&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="500"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="NIT Raipur Location"
+            />
+          </div>
+          <div className="map-overlay">
+            <div className="office-info">
+              <div className="office-header">
+                <div className="office-avatar">🏢</div>
+                <div className="office-status">
+                  <span className="status-dot"></span>
+                  <span>Open Now</span>
+                </div>
+              </div>
+              <h3>🌿 Environova Office</h3>
+              <div className="office-details">
+                <div className="detail-row">
+                  <span className="detail-icon">📍</span>
+                  <span>NIT Raipur Campus</span>
+                </div>
+                <div className="detail-row">
+                  <span className="detail-icon">🏠</span>
+                  <span>G.E. Road, Raipur, Chhattisgarh 492010</span>
+                </div>
+                <div className="detail-row">
+                  <span className="detail-icon">🕒</span>
+                  <span>Mon-Fri: 9:00 AM - 6:00 PM</span>
+                </div>
+              </div>
+              <div className="office-actions">
+                <button 
+                  className="directions-btn primary"
+                  onClick={handleGetDirections}
+                >
+                  <span className="btn-icon">🧭</span>
+                  Get Directions
+                </button>
+                <button className="directions-btn secondary">
+                  <span className="btn-icon">📞</span>
+                  Call Office
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>
