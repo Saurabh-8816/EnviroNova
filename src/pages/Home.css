@@ -656,6 +656,42 @@
   transform: translateY(-2px);
 }
 
+/* Services CTA Section */
+.services-cta-section {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.services-learn-more-btn {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+}
+
+.services-learn-more-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(34, 197, 94, 0.4);
+  background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+.services-learn-more-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.services-learn-more-btn:hover svg {
+  transform: translateX(3px);
+}
+
 /* Container */
 .container {
   max-width: 1400px;
@@ -805,6 +841,10 @@
   transition: all 0.3s ease;
   text-align: center;
   border: 2px solid transparent;
+}
+
+.credential-item.clickable {
+  cursor: pointer;
 }
 
 .credential-item:hover {
@@ -1019,5 +1059,213 @@
   
   .service-card {
     padding: 25px 20px;
+  }
+}
+
+/* Certificate Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #f1f5f9;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  color: #64748b;
+}
+
+.modal-close:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+  transform: scale(1.1);
+}
+
+.modal-header {
+  padding: 30px 30px 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+  text-align: center;
+}
+
+.modal-body {
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.certificate-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8fafc;
+  border-radius: 15px;
+  padding: 20px;
+  min-height: 300px;
+}
+
+.certificate-modal-image {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.certificate-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.certificate-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #475569;
+  margin: 0;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border-left: 4px solid #22c55e;
+}
+
+.certificate-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.info-item {
+  padding: 15px 20px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #334155;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.info-item strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+  .modal-content {
+    margin: 10px;
+    max-height: 95vh;
+  }
+  
+  .modal-body {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .modal-header {
+    padding: 20px 20px 15px;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .certificate-image-container {
+    min-height: 200px;
+    padding: 15px;
+  }
+  
+  .certificate-modal-image {
+    max-height: 250px;
+  }
+  
+  .certificate-description {
+    font-size: 1rem;
+    padding: 15px;
+  }
+  
+  .info-item {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-overlay {
+    padding: 10px;
+  }
+  
+  .modal-close {
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+  
+  .modal-header {
+    padding: 15px 15px 10px;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.25rem;
+  }
+  
+  .modal-body {
+    padding: 15px;
   }
 } 

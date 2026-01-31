@@ -5,11 +5,70 @@ import './Home.css';
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedCertificate, setSelectedCertificate] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
+
+  const certificates = [
+    {
+      id: 1,
+      title: "Environmental Excellence",
+      image: "/Cert1.jpg",
+      alt: "Environmental Certification 1",
+      description: "Certified for outstanding environmental management and sustainable practices.",
+      issuer: "Environmental Standards Authority",
+      validUntil: "2025-12-31"
+    },
+    {
+      id: 2,
+      title: "Safety Standards",
+      image: "/Cert2.jpg",
+      alt: "Environmental Certification 2",
+      description: "Recognized for maintaining the highest safety standards in environmental operations.",
+      issuer: "Safety Compliance Board",
+      validUntil: "2025-10-15"
+    },
+    {
+      id: 3,
+      title: "Quality Assurance",
+      image: "/Cert3.jpg",
+      alt: "Environmental Certification 3",
+      description: "Awarded for exceptional quality assurance in environmental consulting services.",
+      issuer: "Quality Standards Institute",
+      validUntil: "2026-03-20"
+    },
+    {
+      id: 4,
+      title: "Compliance Certified",
+      image: "/Cert4.jpg",
+      alt: "Environmental Certification 4",
+      description: "Certified for full compliance with environmental regulations and standards.",
+      issuer: "Regulatory Compliance Authority",
+      validUntil: "2025-08-30"
+    },
+    {
+      id: 5,
+      title: "ISO 9001 Certified",
+      image: "/logo_9001.png",
+      alt: "ISO 9001 Certification",
+      description: "International standard for quality management systems certification.",
+      issuer: "International Organization for Standardization",
+      validUntil: "2026-01-15"
+    },
+    {
+      id: 6,
+      title: "ISO 14001 Certified",
+      image: "/logo_14001.png",
+      alt: "ISO 14001 Certification",
+      description: "International standard for environmental management systems certification.",
+      issuer: "International Organization for Standardization",
+      validUntil: "2026-01-15"
+    }
+  ];
 
   const services = [
     {
@@ -44,9 +103,6 @@ const Home: React.FC = () => {
         
         <div className="hero-container">
           <div className={`hero-content ${isVisible ? 'animate-in' : ''}`}>
-            <div className="hero-badge">
-              <span className="badge-text">🌿 NIT Raipur Environmental Initiative</span>
-            </div>
             
             <h1 className="hero-title">
               Transforming Tomorrow Through
@@ -72,22 +128,6 @@ const Home: React.FC = () => {
             </div>
           </div>
           
-          <div className="hero-visual">
-            <div className="floating-cards">
-              <div className="card card-1">
-                <div className="card-icon">🌱</div>
-                <div className="card-text">Eco-Friendly Solutions</div>
-              </div>
-              <div className="card card-2">
-                <div className="card-icon">📊</div>
-                <div className="card-text">Data-Driven Insights</div>
-              </div>
-              <div className="card card-3">
-                <div className="card-icon">🎯</div>
-                <div className="card-text">Targeted Results</div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -100,30 +140,19 @@ const Home: React.FC = () => {
               Recognized and certified by leading environmental and quality standards organizations
             </p>
             <div className="credentials-grid">
-              <div className="credential-item">
-                <img src="/Cert1.jpg" alt="Environmental Certification 1" className="credential-image" />
-                <h4>Environmental Excellence</h4>
-              </div>
-              <div className="credential-item">
-                <img src="/Cert2.jpg" alt="Environmental Certification 2" className="credential-image" />
-                <h4>Safety Standards</h4>
-              </div>
-              <div className="credential-item">
-                <img src="/Cert3.jpg" alt="Environmental Certification 3" className="credential-image" />
-                <h4>Quality Assurance</h4>
-              </div>
-              <div className="credential-item">
-                <img src="/Cert4.jpg" alt="Environmental Certification 4" className="credential-image" />
-                <h4>Compliance Certified</h4>
-              </div>
-              <div className="credential-item">
-                <img src="/logo_9001.png" alt="ISO 9001 Certification" className="credential-image" />
-                <h4>ISO 9001 Certified</h4>
-              </div>
-              <div className="credential-item">
-                <img src="/logo_14001.png" alt="ISO 14001 Certification" className="credential-image" />
-                <h4>ISO 14001 Certified</h4>
-              </div>
+              {certificates.map((cert) => (
+                <div 
+                  key={cert.id} 
+                  className="credential-item clickable"
+                  onClick={() => {
+                    setSelectedCertificate(cert);
+                    setIsModalOpen(true);
+                  }}
+                >
+                  <img src={cert.image} alt={cert.alt} className="credential-image" />
+                  <h4>{cert.title}</h4>
+                </div>
+              ))}
             </div>
             <div className="credentials-footer">
               <button className="see-more-link" onClick={() => navigate('/certifications')}>
@@ -145,52 +174,111 @@ const Home: React.FC = () => {
           </div>
           
           <div className="services-grid">
-            {services.map((service, index) => (
-              <div key={index} className="service-card">
-                <div className="service-header">
-                  <div className="service-icon">{service.icon}</div>
-                  <h3 className="service-title">{service.title}</h3>
-                </div>
-                <p className="service-description">{service.description}</p>
-                <ul className="service-features">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                        <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <button className="service-cta" onClick={() => navigate('/services')}>
-                  Learn More
-                </button>
+            <div className="service-category-card">
+              <div className="category-header">
+                <div className="category-icon">♻️</div>
+                <h3 className="category-title">Sustainability Consulting</h3>
               </div>
-            ))}
+              <p className="category-description">Transform your business with sustainable practices and green solutions that reduce environmental impact while improving operational efficiency.</p>
+            </div>
+            
+            <div className="service-category-card">
+              <div className="category-header">
+                <div className="category-icon">📋</div>
+                <h3 className="category-title">Compliance & Auditing</h3>
+              </div>
+              <p className="category-description">Ensure regulatory compliance with expert auditing, monitoring, and risk management services tailored to your industry.</p>
+            </div>
+            
+            <div className="service-category-card">
+              <div className="category-header">
+                <div className="category-icon">🎓</div>
+                <h3 className="category-title">Environmental Training</h3>
+              </div>
+              <p className="category-description">Comprehensive training programs to build environmental awareness and ensure your team has the knowledge to maintain compliance.</p>
+            </div>
+            
+            <div className="service-category-card">
+              <div className="category-header">
+                <div className="category-icon">🔬</div>
+                <h3 className="category-title">Environmental Assessment</h3>
+              </div>
+              <p className="category-description">Detailed environmental impact assessments and monitoring services to support informed decision-making.</p>
+            </div>
+            
+            <div className="service-category-card">
+              <div className="category-header">
+                <div className="category-icon">🌱</div>
+                <h3 className="category-title">Strategic Environmental Consulting</h3>
+              </div>
+              <p className="category-description">High-level strategic consulting to integrate environmental considerations into business strategy and operations.</p>
+            </div>
+            
+            <div className="service-category-card">
+              <div className="category-header">
+                <div className="category-icon">⚡</div>
+                <h3 className="category-title">Environmental Technology</h3>
+              </div>
+              <p className="category-description">Cutting-edge environmental technology solutions to optimize performance and reduce environmental impact.</p>
+            </div>
+            
+            <div className="service-category-card">
+              <div className="category-header">
+                <div className="category-icon">🌊</div>
+                <h3 className="category-title">Water & Wastewater Management</h3>
+              </div>
+              <p className="category-description">Comprehensive water resource management, treatment solutions, and wastewater optimization for sustainable operations.</p>
+            </div>
+            
+            <div className="service-category-card">
+              <div className="category-header">
+                <div className="category-icon">🏭</div>
+                <h3 className="category-title">Industrial Environmental Solutions</h3>
+              </div>
+              <p className="category-description">Specialized environmental solutions for industrial facilities including emission control, waste management, and process optimization.</p>
+            </div>
           </div>
+          
+          <div className="services-cta-section">
+            <button className="services-learn-more-btn" onClick={() => navigate('/services')}>
+              <span>Explore All Our Services</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </button>
+          </div>
+          
         </div>
       </section>
 
-
-      {/* Call to Action */}
-      <section className="cta-section">
-        <div className="container">
-          <div className="cta-content">
-            <h2 className="cta-title">Ready to Make an Impact?</h2>
-            <p className="cta-description">
-              Join hundreds of organizations already transforming their environmental footprint
-            </p>
-            <div className="cta-actions">
-              <button className="cta-primary" onClick={() => navigate('/contact')}>
-                Get Started Today
-              </button>
-              <button className="cta-secondary" onClick={() => navigate('/projects')}>
-                View Our Work
-              </button>
+      {/* Certificate Modal */}
+      {isModalOpen && selectedCertificate && (
+        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="modal-close"
+              onClick={() => setIsModalOpen(false)}
+            >
+              ×
+            </button>
+            <div className="modal-header">
+              <h2>{selectedCertificate.title}</h2>
+            </div>
+            <div className="modal-body">
+              <div className="certificate-image-container">
+                <img 
+                  src={selectedCertificate.image} 
+                  alt={selectedCertificate.alt} 
+                  className="certificate-modal-image"
+                />
+              </div>
+              <div className="certificate-details">
+                <p className="certificate-description">{selectedCertificate.description}</p>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      )}
     </div>
   );
 };

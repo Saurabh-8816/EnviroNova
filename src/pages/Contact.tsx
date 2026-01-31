@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Contact.css';
 
+const GOOGLE_SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbw_gOczPF6AUjpUBH6UF-3siSMYG25nJWVoHXGjiYwYzMBPdy164mo5gX9oVrCYoCTc/exec';
+
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -12,6 +14,8 @@ const Contact: React.FC = () => {
   });
 
   const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -21,11 +25,71 @@ const Contact: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for reaching out! We\'ll get back to you within 24 hours.');
-    setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
+
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    const payload = {
+      ...formData,
+      pageUrl: window.location.href,
+      userAgent: navigator.userAgent
+    };
+
+    try {
+      // Prefer a CORS request (lets us read the JSON response). If CORS is not enabled
+      // on the Apps Script deployment, we'll fall back to a `no-cors` fire-and-forget.
+      const res = await fetch(GOOGLE_SHEETS_WEBAPP_URL, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          // Use a simple content-type to reduce preflight/CORS issues.
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        // Apps Script typically returns JSON; if it doesn't, we still treat 2xx as success.
+        try {
+          const data = (await res.json()) as { ok?: boolean; error?: string };
+          if (data?.ok === false) throw new Error(data.error || 'Submission failed.');
+        } catch {
+          // ignore parse errors
+        }
+      } else {
+        const text = await res.text();
+        throw new Error(text || `Request failed (${res.status}).`);
+      }
+
+      alert('Thank you for reaching out! We\'ll get back to you within 24 hours.');
+      setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
+    } catch (err) {
+      // If your Apps Script web app doesn’t allow CORS, browsers will block reading the response.
+      // Fallback: send with no-cors (request still goes through), then show success.
+      try {
+        await fetch(GOOGLE_SHEETS_WEBAPP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify(payload)
+        });
+        alert('Thank you for reaching out! We\'ll get back to you within 24 hours.');
+        setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
+      } catch (fallbackErr) {
+        const message = err instanceof Error ? err.message : 'Unknown error';
+        setSubmitError(message);
+        alert(`Sorry — we couldn't submit the form. ${message}`);
+        console.error('Contact form submission failed:', err, fallbackErr);
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleGetDirections = () => {
@@ -211,9 +275,15 @@ const Contact: React.FC = () => {
               </div>
 
               <button type="submit" className="submit-button">
-                <span>Send My Request</span>
+                <span>{isSubmitting ? 'Sending…' : 'Send My Request'}</span>
                 <div className="button-ripple"></div>
               </button>
+
+              {submitError && (
+                <div role="alert" style={{ marginTop: '12px' }}>
+                  {submitError}
+                </div>
+              )}
             </form>
           </div>
         </div>
