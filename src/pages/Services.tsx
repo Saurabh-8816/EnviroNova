@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './Services.css';
 
 const Services: React.FC = () => {
-  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const serviceCategories = [

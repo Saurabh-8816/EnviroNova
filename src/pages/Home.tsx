@@ -70,26 +70,6 @@ const Home: React.FC = () => {
     }
   ];
 
-  const services = [
-    {
-      title: "Sustainability Consulting",
-      description: "Transform your business with sustainable practices and green solutions",
-      icon: "♻️",
-      features: ["Carbon Footprint", "Green Certification", "Waste Reduction"]
-    },
-    {
-      title: "Compliance & Auditing",
-      description: "Ensure regulatory compliance with expert auditing and monitoring",
-      icon: "📋",
-      features: ["Regulatory Review", "Compliance Audits", "Risk Management"]
-    },
-    {
-      title: "Environmental Training",
-      description: "Comprehensive training programs for environmental awareness",
-      icon: "🎓",
-      features: ["Staff Training", "Safety Protocols", "Best Practices"]
-    }
-  ];
 
   return (
     <div className="home">
