@@ -49,6 +49,7 @@ const About: React.FC = () => {
   ];
 
   // Create infinite loop by tripling the slides
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const slides = useMemo(() => [...originalSlides, ...originalSlides, ...originalSlides], []);
 
   useEffect(() => {
