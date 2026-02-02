@@ -2,6 +2,207 @@
   margin-top: 80px;
 }
 
+/* BCG-Style Hero Section */
+.bcg-hero {
+  background: #ffffff;
+  padding: 60px 0 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.bcg-hero-content {
+  max-width: 900px;
+  margin: 0 auto 50px;
+  padding: 0 20px;
+}
+
+.bcg-welcome {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.bcg-title {
+  font-size: 3.2rem;
+  font-weight: 400;
+  color: #1a1a2e;
+  line-height: 1.2;
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.bcg-carousel {
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+.bcg-slides {
+  display: flex;
+  gap: 25px;
+  padding: 20px 0;
+  align-items: center;
+  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: transform;
+}
+
+.bcg-slide {
+  flex: 0 0 220px;
+  min-width: 220px;
+  max-width: 220px;
+  transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  opacity: 0.5;
+}
+
+/* Active slide (center - 3rd position) */
+.bcg-slide.active {
+  flex: 0 0 300px;
+  min-width: 300px;
+  max-width: 300px;
+  opacity: 1;
+}
+
+/* Adjacent slides (2nd and 4th position) */
+.bcg-slide.adjacent {
+  opacity: 0.9;
+}
+
+/* Outer slides (1st and 5th position) */
+.bcg-slide.outer {
+  opacity: 0.85;
+}
+
+.bcg-slide.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bcg-slide-image {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 350px;
+  transition: height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Override heights based on position class - these take priority */
+.bcg-slide.outer .bcg-slide-image {
+  height: 380px !important;
+}
+
+.bcg-slide.adjacent .bcg-slide-image {
+  height: 300px !important;
+}
+
+.bcg-slide.active .bcg-slide-image {
+  height: 450px !important;
+}
+
+.bcg-slide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.bcg-slide:hover .bcg-slide-image img {
+  transform: scale(1.05);
+}
+
+.bcg-slide-category {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(80, 80, 80, 0.9);
+  color: white;
+  padding: 8px 14px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 4px;
+}
+
+.bcg-slide-info {
+  background: white;
+  padding: 20px;
+  border-radius: 0 0 8px 8px;
+  text-align: left;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin-top: -30px;
+  position: relative;
+  z-index: 2;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.bcg-slide-meta {
+  font-size: 0.75rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.bcg-slide-title {
+  font-size: 1.1rem;
+  color: #1a1a2e;
+  margin-top: 10px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.bcg-controls {
+  display: flex;
+  gap: 10px;
+  padding: 30px 5%;
+  justify-content: flex-start;
+}
+
+.bcg-control-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  background: white;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #333;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bcg-control-btn:hover {
+  border-color: #333;
+  background: #333;
+  color: white;
+}
+
+@media (max-width: 968px) {
+  .bcg-title {
+    font-size: 2.2rem;
+  }
+  
+  .bcg-slide {
+    flex: 0 0 40%;
+  }
+}
+
+@media (max-width: 600px) {
+  .bcg-title {
+    font-size: 1.8rem;
+  }
+  
+  .bcg-slide {
+    flex: 0 0 70%;
+  }
+}
+
+/* Original page-header styles (kept for backward compatibility) */
 .page-header {
   background: linear-gradient(135deg, #0066cc, #004499);
   color: white;
@@ -97,6 +298,94 @@
   
   .about-text p {
     font-size: 1rem;
+  }
+}
+
+/* Vision Section - McKinsey Style */
+.vision-section {
+  background: #0a1628;
+  padding: 0;
+}
+
+.vision-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 500px;
+}
+
+.vision-content {
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.vision-content h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  font-family: 'Georgia', serif;
+}
+
+.vision-content p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #a8b5c4;
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+
+.vision-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.vision-cta:hover {
+  gap: 1rem;
+}
+
+.vision-cta .arrow {
+  transition: transform 0.3s ease;
+}
+
+.vision-cta:hover .arrow {
+  transform: translateX(5px);
+}
+
+.vision-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.vision-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 968px) {
+  .vision-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .vision-content {
+    padding: 60px 30px;
+  }
+  
+  .vision-content h2 {
+    font-size: 2rem;
+  }
+  
+  .vision-image {
+    height: 400px;
   }
 }
 

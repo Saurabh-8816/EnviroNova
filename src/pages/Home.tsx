@@ -108,6 +108,15 @@ const Home: React.FC = () => {
             </div>
           </div>
           
+          {/* 3D Spline Visual */}
+          <div className="hero-visual">
+            <div 
+              className="spline-container"
+              dangerouslySetInnerHTML={{
+                __html: `<spline-viewer url="https://prod.spline.design/fJ2ptJKzT-sDkpfO/scene.splinecode"></spline-viewer>`
+              }}
+            />
+          </div>
         </div>
       </section>
 
@@ -139,6 +148,26 @@ const Home: React.FC = () => {
                 Want to see more →
               </button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Vision Section - McKinsey Style */}
+      <section className="vision-section">
+        <div className="vision-container">
+          <div className="vision-content">
+            <h2>Building Tomorrow's Sustainable Future</h2>
+            <p>
+              There's consulting. Then there's consulting that reimagines and transforms 
+              organizations - powered by expertise, built with innovation, and proven to 
+              create lasting environmental impact.
+            </p>
+            <a href="/contact" className="vision-cta">
+              Get started <span className="arrow">→</span>
+            </a>
+          </div>
+          <div className="vision-image">
+            <img src="/TeamCollab.jpg" alt="Team collaboration" />
           </div>
         </div>
       </section>
