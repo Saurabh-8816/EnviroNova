@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Earth3D from '../components/Earth3D';
-import WaterTreatment3D from '../components/WaterTreatment3D';
-import WaterTreatment3DThree from '../components/WaterTreatment3DThree';
-import RiverBasin3D from '../components/RiverBasin3D';
 import RiverBasinSVG from '../components/RiverBasinSVG';
-import Spline from '@splinetool/react-spline';
 import './Home.css';
-import Earth3DPro from '../components/Earth3DPro';
-import Earth3D2 from '../components/Earth3D2';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
