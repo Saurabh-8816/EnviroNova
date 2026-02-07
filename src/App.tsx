@@ -11,6 +11,7 @@ import Services from './pages/Services';
 import Projects from './pages/Projects';
 import Certifications from './pages/Certifications';
 import Contact from './pages/Contact';
+import Clientele from './pages/Clientele';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/certifications" element={<Certifications />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/Clientele" element={<Clientele />} />
           </Routes>
         </main>
         <Footer />
@@ -39,7 +41,7 @@ function App() {
 // Component to handle hash-based scrolling
 function HashScrollHandler() {
   const location = useLocation();
-  
+
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace('#', '');
