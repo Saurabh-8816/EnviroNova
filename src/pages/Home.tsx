@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Earth3D from '../components/Earth3D';
+import WaterTreatment3D from '../components/WaterTreatment3D';
+import WaterTreatment3DThree from '../components/WaterTreatment3DThree';
+import RiverBasin3D from '../components/RiverBasin3D';
+import RiverBasinSVG from '../components/RiverBasinSVG';
+import Spline from '@splinetool/react-spline';
 import './Home.css';
+import Earth3DPro from '../components/Earth3DPro';
+import Earth3D2 from '../components/Earth3D2';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -108,7 +116,28 @@ const Home: React.FC = () => {
             </div>
           </div>
           
-          {/* 3D Spline Visual */}
+          {/* 3D Water Treatment Process Visual */}
+          {/* <div className="hero-visual">
+             <WaterTreatment3D />
+            <WaterTreatment3DThree/> 
+          </div>  */}
+
+          {/*3D River Basin3D */}
+          <div className="hero-visual">
+            {/* <RiverBasin3D/>  */}
+              <RiverBasinSVG/>
+          </div>
+
+          {/*3D Earth Visual - Three.js*/}
+          {/* <div className="hero-visual">
+            <Earth3D />
+          </div> */}
+         
+
+          {/* Old Spline Code (kept for future use)
+<div className="hero-visual">
+  <Spline scene="https://prod.spline.design/otRUhttWA7In4Rm3/scene.splinecode" />
+</div>
           <div className="hero-visual">
             <div 
               className="spline-container"
@@ -117,6 +146,7 @@ const Home: React.FC = () => {
               }}
             />
           </div>
+          */}
         </div>
       </section>
 

@@ -44,14 +44,14 @@ const Header: React.FC = () => {
             <div className="logo-container">
               <img 
                 src="/Mainlogo.png" 
-                alt="ENVNITRR Logo" 
+                alt="Environova Logo" 
                 className="logo-image"
               />
-              <div className="logo-text">
+              <div className="logo-text-group">
                 <div className="logo-title">Environova</div>
+                <div className="logo-subtitle">Engineering and Consultancy Services Private Limited</div>
               </div>
             </div>
-            <div className="logo-subtitle">Engineering and Consultancy Services Private Limited</div>
           </Link>
         </div>
         
@@ -96,8 +96,14 @@ const Header: React.FC = () => {
             <li className={`nav-item ${isActive('/projects') ? 'active' : ''}`}>
               <Link to="/projects">Projects</Link>
             </li>
-            <li className={`nav-item ${isActive('/certifications') ? 'active' : ''}`}>
-              <Link to="/certifications">Certifications</Link>
+            <li className={`nav-item ${isActive('/Research') ? 'active' : ''}`}>
+              <Link to="/Research">Research</Link>
+            </li>
+             <li className={`nav-item ${isActive('/Publications') ? 'active' : ''}`}>
+              <Link to="/Publications">Publications</Link>
+            </li>
+             <li className={`nav-item ${isActive('/Clientele') ? 'active' : ''}`}>
+              <Link to="/Clientele">Clientele</Link>
             </li>
             <li className={`nav-item ${isActive('/contact') ? 'active' : ''}`}>
               <Link to="/contact">Contact</Link>

@@ -67,14 +67,26 @@
   opacity: 1;
 }
 
-/* Adjacent slides (2nd and 4th position) */
+.bcg-slide.active .bcg-slide-image {
+  height: 450px;
+}
+
+/* Adjacent slides (2nd and 4th position) - red arrows */
 .bcg-slide.adjacent {
   opacity: 0.9;
 }
 
-/* Outer slides (1st and 5th position) */
+.bcg-slide.adjacent .bcg-slide-image {
+  height: 320px;
+}
+
+/* Outer slides (1st and 5th position) - yellow arrows */
 .bcg-slide.outer {
   opacity: 0.85;
+}
+
+.bcg-slide.outer .bcg-slide-image {
+  height: 400px;
 }
 
 .bcg-slide.hidden {
@@ -86,22 +98,10 @@
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-  height: 350px;
-  transition: height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  height: 280px;
 }
 
-/* Override heights based on position class - these take priority */
-.bcg-slide.outer .bcg-slide-image {
-  height: 380px !important;
-}
-
-.bcg-slide.adjacent .bcg-slide-image {
-  height: 300px !important;
-}
-
-.bcg-slide.active .bcg-slide-image {
-  height: 450px !important;
-}
+/* Remove nth-child rules - height should be controlled only by position classes */
 
 .bcg-slide-image img {
   width: 100%;

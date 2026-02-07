@@ -177,6 +177,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .spline-container {
@@ -1395,5 +1396,113 @@
   
   .vision-image {
     height: 400px;
+  }
+}
+
+/* Water Treatment Section */
+.water-treatment-section {
+  padding: 6rem 0;
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.water-treatment-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+}
+
+.water-treatment-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.3), transparent);
+}
+
+.water-treatment-section .section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.water-treatment-section .section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #F8FAFC;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #00D4FF 0%, #22C55E 50%, #3B82F6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.water-treatment-section .section-subtitle {
+  font-size: 1.125rem;
+  color: #94A3B8;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.water-treatment-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.water-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #0099CC 0%, #006699 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 153, 204, 0.3);
+}
+
+.water-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 153, 204, 0.4);
+  background: linear-gradient(135deg, #00B4E6 0%, #0088BB 100%);
+}
+
+.water-cta-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.water-cta-btn:hover svg {
+  transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+  .water-treatment-section {
+    padding: 4rem 0;
+  }
+  
+  .water-treatment-section .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .water-treatment-section .section-subtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .water-cta-btn {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9rem;
   }
 } 

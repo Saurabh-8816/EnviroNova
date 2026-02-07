@@ -1,0 +1,218 @@
+/* River Basin 3D Visualization Container */
+.river-basin-container {
+  width: 100%;
+  height: 600px;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Legend overlay */
+.river-basin-legend {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  max-width: 400px;
+  z-index: 10;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .river-basin-container {
+    height: 500px;
+    border-radius: 16px;
+  }
+  
+  .river-basin-legend {
+    padding: 12px 16px;
+    gap: 10px 16px;
+  }
+  
+  .legend-item {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .river-basin-container {
+    height: 400px;
+    border-radius: 12px;
+    margin: 0 -1rem;
+    max-width: calc(100% + 2rem);
+  }
+  
+  .river-basin-legend {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    max-width: none;
+    padding: 10px 14px;
+    gap: 8px 14px;
+    justify-content: center;
+  }
+  
+  .legend-item {
+    font-size: 10px;
+    gap: 5px;
+  }
+  
+  .legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .river-basin-container {
+    height: 350px;
+    border-radius: 8px;
+  }
+  
+  .river-basin-legend {
+    padding: 8px 12px;
+    gap: 6px 10px;
+  }
+  
+  .legend-item {
+    font-size: 9px;
+  }
+  
+  .legend-color {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Smooth entrance animation */
+.river-basin-container {
+  animation: fadeInScale 0.8s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Canvas styling */
+.river-basin-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  cursor: grab;
+}
+
+.river-basin-container canvas:active {
+  cursor: grabbing;
+}
+
+/* Loading state */
+.river-basin-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
+  z-index: -1;
+}
+
+/* Subtle border glow effect */
+.river-basin-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 768px) {
+  .river-basin-container::after {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .river-basin-container::after {
+    border-radius: 8px;
+  }
+}
+
+/* Interaction hint */
+.river-basin-container .interaction-hint {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  color: #6B7280;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.river-basin-container:hover .interaction-hint {
+  opacity: 0;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .river-basin-legend {
+    background: rgba(30, 41, 59, 0.95);
+  }
+  
+  .legend-item {
+    color: #E2E8F0;
+  }
+}
