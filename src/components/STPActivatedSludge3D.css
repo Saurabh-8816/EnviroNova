@@ -1,0 +1,328 @@
+/* ========================================
+   Activated Sludge Process (ASP) 3D SVG
+   ======================================== */
+
+/* Container */
+.stp-asp-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: linear-gradient(135deg, #0a0f1c 0%, #111827 50%, #1e293b 100%);
+    border-radius: 20px;
+    box-shadow:
+        0 25px 60px -12px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    position: relative;
+    animation: stpFadeInUp 1s ease-out;
+}
+
+.stp-asp-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.4), transparent);
+}
+
+.stp-asp-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ---- Text styles ---- */
+.stp-title-text {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    fill: #f1f5f9;
+    letter-spacing: -0.5px;
+}
+
+.stp-label-text {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    fill: #cbd5e1;
+    letter-spacing: 0.3px;
+}
+
+.stp-label-sub {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    fill: #94a3b8;
+}
+
+.stp-legend-text {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    fill: #94a3b8;
+}
+
+.stp-pump-text {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    fill: #fff;
+}
+
+/* ---- Water level wave ---- */
+.stp-water-level {
+    animation: stpWaterWave 4s ease-in-out infinite;
+}
+
+@keyframes stpWaterWave {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-1.5px);
+    }
+}
+
+/* ---- Rotating scraper arms ---- */
+.stp-rotating-arm-primary {
+    transform-origin: 340px 230px;
+    animation: stpRotateArm 12s linear infinite;
+}
+
+.stp-rotating-arm-secondary {
+    transform-origin: 790px 370px;
+    animation: stpRotateArm 14s linear infinite;
+}
+
+.stp-rotating-arm-thickener {
+    transform-origin: 600px 460px;
+    animation: stpRotateArm 16s linear infinite;
+}
+
+@keyframes stpRotateArm {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---- Surface aerator spin ---- */
+.stp-aerator {
+    animation: stpAeratorSpin 3s linear infinite;
+}
+
+@keyframes stpAeratorSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.stp-aerator-1 {
+    transform-origin: 520px 290px;
+}
+
+.stp-aerator-2 {
+    transform-origin: 560px 305px;
+}
+
+.stp-aerator-3 {
+    transform-origin: 600px 290px;
+}
+
+.stp-aerator-4 {
+    transform-origin: 640px 305px;
+}
+
+/* ---- Aeration bubbles ---- */
+.stp-aeration-bubbles circle {
+    filter: drop-shadow(0 0 2px rgba(96, 165, 250, 0.4));
+}
+
+/* ---- Pipe segment pulse ---- */
+.stp-pipe-segment {
+    animation: stpPipeFlow 3s ease-in-out infinite;
+}
+
+@keyframes stpPipeFlow {
+
+    0%,
+    100% {
+        stroke-opacity: 0.7;
+    }
+
+    50% {
+        stroke-opacity: 1;
+    }
+}
+
+/* ---- Water particle glow ---- */
+.stp-water-particle {
+    filter: drop-shadow(0 0 3px currentColor);
+}
+
+/* ---- Treatment unit hover ---- */
+.stp-unit {
+    transition: filter 0.3s ease;
+    cursor: pointer;
+}
+
+.stp-unit:hover {
+    filter: brightness(1.15) drop-shadow(0 0 12px rgba(56, 189, 248, 0.3));
+}
+
+/* ---- Ambient glow per unit ---- */
+.stp-screening {
+    filter: drop-shadow(0 0 15px rgba(148, 163, 184, 0.15));
+}
+
+.stp-primary-clarifier {
+    filter: drop-shadow(0 0 15px rgba(122, 158, 126, 0.15));
+}
+
+.stp-aeration-tank {
+    filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.2));
+}
+
+.stp-secondary-clarifier {
+    filter: drop-shadow(0 0 18px rgba(34, 197, 94, 0.15));
+}
+
+.stp-sludge-thickener {
+    filter: drop-shadow(0 0 12px rgba(74, 222, 128, 0.15));
+}
+
+.stp-sludge-holding {
+    filter: drop-shadow(0 0 12px rgba(139, 115, 85, 0.2));
+}
+
+.stp-drying-bed {
+    filter: drop-shadow(0 0 10px rgba(161, 98, 7, 0.15));
+}
+
+.stp-disinfection {
+    filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.2));
+}
+
+.stp-nallah {
+    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.25));
+}
+
+/* ---- Clean water sparkle ---- */
+.stp-sparkles circle {
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+}
+
+/* ---- Flow arrows pulse ---- */
+.stp-flow-arrows polygon {
+    filter: drop-shadow(0 0 3px currentColor);
+}
+
+/* ---- Platform pulse ---- */
+.stp-platform polygon {
+    animation: stpPlatformPulse 8s ease-in-out infinite;
+}
+
+@keyframes stpPlatformPulse {
+
+    0%,
+    100% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 0.32;
+    }
+}
+
+/* ---- Entrance ---- */
+@keyframes stpFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+    .stp-asp-container {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .stp-title-text {
+        font-size: 18px;
+    }
+
+    .stp-label-text {
+        font-size: 10px;
+    }
+
+    .stp-label-sub {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .stp-asp-container {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    .stp-title-text {
+        font-size: 16px;
+    }
+
+    .stp-label-text {
+        font-size: 9px;
+    }
+
+    .stp-label-sub {
+        font-size: 7px;
+    }
+
+    .stp-legend-text {
+        font-size: 7px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stp-asp-container {
+        padding: 0.75rem;
+        margin: 0 -1rem;
+        border-radius: 0;
+    }
+
+    .stp-title-text {
+        font-size: 14px;
+    }
+
+    .stp-label-text {
+        font-size: 8px;
+    }
+
+    .stp-label-sub {
+        font-size: 6px;
+    }
+
+    .stp-legend-text {
+        display: none;
+    }
+}

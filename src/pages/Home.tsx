@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Home.css';
 import Earth3D from '../components/Earth3D';
 import WaterTreatment3D from '../components/WaterTreatment3D';
+import STPActivatedSludge3D from '../components/STPActivatedSludge3D';
 import WaterTreatment3DThree from '../components/WaterTreatment3DThree';
 import RiverBasin3D from '../components/RiverBasin3D';
 import RiverBasinSVG from '../components/RiverBasinSVG';
 import Spline from '@splinetool/react-spline';
-import './Home.css';
 import Earth3DPro from '../components/Earth3DPro';
 import Earth3D2 from '../components/Earth3D2';
 
@@ -88,26 +89,26 @@ const Home: React.FC = () => {
             <div key={i} className={`particle particle-${i + 1}`}></div>
           ))}
         </div>
-        
+
         <div className="hero-container">
           <div className={`hero-content ${isVisible ? 'animate-in' : ''}`}>
-            
+
             <h1 className="hero-title">
               Transforming Tomorrow Through
               <span className="gradient-text"> Sustainable Innovation</span>
             </h1>
-            
+
             <p className="hero-subtitle">
-              Leading environmental consulting services that bridge the gap between 
-              business growth and ecological responsibility. Join us in creating a 
+              Leading environmental consulting services that bridge the gap between
+              business growth and ecological responsibility. Join us in creating a
               sustainable future for generations to come.
             </p>
-            
+
             <div className="hero-actions">
               <button className="primary-cta" onClick={() => navigate('/contact')}>
                 <span>Start Your Journey</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
               </button>
               <button className="secondary-cta" onClick={() => navigate('/about')}>
@@ -115,24 +116,25 @@ const Home: React.FC = () => {
               </button>
             </div>
           </div>
-          
+
           {/* 3D Water Treatment Process Visual */}
-          {/* <div className="hero-visual">
-             <WaterTreatment3D />
-            <WaterTreatment3DThree/> 
-          </div>  */}
+          <div className="hero-visual">
+            <STPActivatedSludge3D />
+            {/* <WaterTreatment3D /> */}
+            {/* <WaterTreatment3DThree/>  */}
+          </div>
 
           {/*3D River Basin3D */}
-          <div className="hero-visual">
-            {/* <RiverBasin3D/>  */}
+          {/* <div className="hero-visual">
+             <RiverBasin3D/>
               <RiverBasinSVG/>
-          </div>
+          </div> */}
 
           {/*3D Earth Visual - Three.js*/}
           {/* <div className="hero-visual">
-            <Earth3D />
+            <Earth3DPro />
           </div> */}
-         
+
 
           {/* Old Spline Code (kept for future use)
 <div className="hero-visual">
@@ -160,8 +162,8 @@ const Home: React.FC = () => {
             </p>
             <div className="credentials-grid">
               {certificates.map((cert) => (
-                <div 
-                  key={cert.id} 
+                <div
+                  key={cert.id}
                   className="credential-item clickable"
                   onClick={() => {
                     setSelectedCertificate(cert);
@@ -188,8 +190,8 @@ const Home: React.FC = () => {
           <div className="vision-content">
             <h2>Building Tomorrow's Sustainable Future</h2>
             <p>
-              There's consulting. Then there's consulting that reimagines and transforms 
-              organizations - powered by expertise, built with innovation, and proven to 
+              There's consulting. Then there's consulting that reimagines and transforms
+              organizations - powered by expertise, built with innovation, and proven to
               create lasting environmental impact.
             </p>
             <a href="/contact" className="vision-cta">
@@ -211,7 +213,7 @@ const Home: React.FC = () => {
               Comprehensive environmental solutions tailored to your business needs
             </p>
           </div>
-          
+
           <div className="services-grid">
             <div className="service-category-card">
               <div className="category-header">
@@ -220,7 +222,7 @@ const Home: React.FC = () => {
               </div>
               <p className="category-description">Transform your business with sustainable practices and green solutions that reduce environmental impact while improving operational efficiency.</p>
             </div>
-            
+
             <div className="service-category-card">
               <div className="category-header">
                 <div className="category-icon">📋</div>
@@ -228,7 +230,7 @@ const Home: React.FC = () => {
               </div>
               <p className="category-description">Ensure regulatory compliance with expert auditing, monitoring, and risk management services tailored to your industry.</p>
             </div>
-            
+
             <div className="service-category-card">
               <div className="category-header">
                 <div className="category-icon">🎓</div>
@@ -236,7 +238,7 @@ const Home: React.FC = () => {
               </div>
               <p className="category-description">Comprehensive training programs to build environmental awareness and ensure your team has the knowledge to maintain compliance.</p>
             </div>
-            
+
             <div className="service-category-card">
               <div className="category-header">
                 <div className="category-icon">🔬</div>
@@ -244,7 +246,7 @@ const Home: React.FC = () => {
               </div>
               <p className="category-description">Detailed environmental impact assessments and monitoring services to support informed decision-making.</p>
             </div>
-            
+
             <div className="service-category-card">
               <div className="category-header">
                 <div className="category-icon">🌱</div>
@@ -252,7 +254,7 @@ const Home: React.FC = () => {
               </div>
               <p className="category-description">High-level strategic consulting to integrate environmental considerations into business strategy and operations.</p>
             </div>
-            
+
             <div className="service-category-card">
               <div className="category-header">
                 <div className="category-icon">⚡</div>
@@ -260,7 +262,7 @@ const Home: React.FC = () => {
               </div>
               <p className="category-description">Cutting-edge environmental technology solutions to optimize performance and reduce environmental impact.</p>
             </div>
-            
+
             <div className="service-category-card">
               <div className="category-header">
                 <div className="category-icon">🌊</div>
@@ -268,7 +270,7 @@ const Home: React.FC = () => {
               </div>
               <p className="category-description">Comprehensive water resource management, treatment solutions, and wastewater optimization for sustainable operations.</p>
             </div>
-            
+
             <div className="service-category-card">
               <div className="category-header">
                 <div className="category-icon">🏭</div>
@@ -277,16 +279,16 @@ const Home: React.FC = () => {
               <p className="category-description">Specialized environmental solutions for industrial facilities including emission control, waste management, and process optimization.</p>
             </div>
           </div>
-          
+
           <div className="services-cta-section">
             <button className="services-learn-more-btn" onClick={() => navigate('/services')}>
               <span>Explore All Our Services</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </button>
           </div>
-          
+
         </div>
       </section>
 
@@ -294,7 +296,7 @@ const Home: React.FC = () => {
       {isModalOpen && selectedCertificate && (
         <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button 
+            <button
               className="modal-close"
               onClick={() => setIsModalOpen(false)}
             >
@@ -305,9 +307,9 @@ const Home: React.FC = () => {
             </div>
             <div className="modal-body">
               <div className="certificate-image-container">
-                <img 
-                  src={selectedCertificate.image} 
-                  alt={selectedCertificate.alt} 
+                <img
+                  src={selectedCertificate.image}
+                  alt={selectedCertificate.alt}
                   className="certificate-modal-image"
                 />
               </div>
